@@ -1,0 +1,35 @@
+﻿@model List<BlogModel>
+
+@{
+    ViewData["Title"] = $"Blog {Model.Count}";
+    Layout = "_Layout";
+    int i = 0;
+}
+
+<h3>Blog List</h3>
+
+<a href="/Blog/Create" class="btn btn-outline-success mt-2">New</a>
+
+<table class="table table-bordered table-striped mt-3">
+    <thead>
+       <tr>
+            <th>No.</th>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Content</th>
+       </tr>
+    </thead>
+    <tbody>
+        @foreach (BlogModel item in Model)
+        {
+            <tr>
+                <td>@(++i)</td>
+                <td>@item.BlogId</td>
+                <td>@item.BlogTitle</td>
+                <td>@item.BlogAuthor</td>
+                <td>@item.BlogContent</td>
+            </tr>
+        }
+    </tbody>
+</table>

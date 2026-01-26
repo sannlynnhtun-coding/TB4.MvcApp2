@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Create Blog Post";
+    //get/post
+}
+
+<h3>New Blog</h3>
+
+<form action="/Blog/Save" method="post">
+    <div class="mb-3">
+        <label for="blogTitle" class="form-label">Blog Title</label>
+        <input type="text" class="form-control" id="blogTitle" name="BlogTitle" placeholder="Enter blog title">
+    </div>
+
+    <div class="mb-3">
+        <label for="blogAuthor" class="form-label">Blog Author</label>
+        <input type="text" class="form-control" id="blogAuthor" name="BlogAuthor" placeholder="Enter author name">
+    </div>
+
+    <div class="mb-3">
+        <label for="blogContent" class="form-label">Blog Content</label>
+        <textarea class="form-control" id="blogContent" rows="5" name="BlogContent" placeholder="Write your blog content here..."></textarea>
+    </div>
+
+    <a href="/Blog" class="btn btn-outline-dark">Back</a>
+    <button type="submit" class="btn btn-success">Save</button>
+</form> 
