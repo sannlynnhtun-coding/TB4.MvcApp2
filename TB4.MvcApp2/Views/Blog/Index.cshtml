@@ -13,6 +13,7 @@
 <table class="table table-bordered table-striped mt-3">
     <thead>
        <tr>
+           <th>Actions</th>
             <th>No.</th>
             <th>Id</th>
             <th>Title</th>
@@ -24,6 +25,10 @@
         @foreach (BlogModel item in Model)
         {
             <tr>
+                <td>
+                    <a href="/Blog/Edit/@item.BlogId" class="btn btn-outline-warning">Edit</a>
+                    <button class="btn btn-outline-danger">Delete</button>
+                </td>
                 <td>@(++i)</td>
                 <td>@item.BlogId</td>
                 <td>@item.BlogTitle</td>

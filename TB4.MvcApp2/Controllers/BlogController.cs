@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using System.Collections;
 using System.Data;
 
 namespace TB4.MvcApp2.Controllers
@@ -206,7 +207,7 @@ namespace TB4.MvcApp2.Controllers
             using IDbConnection db = new SqlConnection(_connectionString);
             foreach (var blog in blogs)
             {
-                blog.BlogId = Ulid.NewUlid().ToString();    
+                blog.BlogId = Ulid.NewUlid().ToString();
                 string query = @"INSERT INTO [dbo].[Tbl_Blog]
            ([BlogId]
            ,[BlogTitle]
@@ -219,6 +220,44 @@ namespace TB4.MvcApp2.Controllers
            ,@BlogContent)";
                 db.Execute(query, blog);
             }
+            return Redirect("/Blog");
+        }
+
+        // https://localhost:3000/blog/edit/01KFXEKBC84QQ5QSAEC8SWKRZZ
+        // https://localhost:3000/blog/edit?id=01KFXEKBC84QQ5QSAEC8SWKRZZ
+        // https://localhost:3000/blog/edit?id=01KFXEKBC84QQ5QSAEC8SWKRZZ&type=Testing&amount=10000
+        public IActionResult Edit(string id)
+        {
+            using IDbConnection db = new SqlConnection(_connectionString);
+            var item = db.QueryFirstOrDefault<BlogModel>("select * from Tbl_Blog where BlogId = @BlogId",
+                new { BlogId = id });
+            if(item is null)
+            {
+                string message = "No data found.";
+                //ViewBag.Message = message;
+                //ViewData["Message"] = message;  
+                TempData["ErrorMessage"] = message;
+
+                return Redirect("/Blog");
+            }
+
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult Update(string id, BlogModel requestModel)
+        {
+            requestModel.BlogId = id;
+            string query = @"UPDATE [dbo].[Tbl_Blog]
+   SET [BlogTitle] = @BlogTitle
+      ,[BlogAuthor] = @BlogAuthor
+      ,[BlogContent] = @BlogContent
+ WHERE BlogId = @BlogId";
+            using IDbConnection db = new SqlConnection(_connectionString);
+            var result = db.Execute(query, requestModel);
+
+            TempData["SuccessMessage"] = "Updating successful.";
+
             return Redirect("/Blog");
         }
     }

@@ -1,0 +1,27 @@
+﻿@model BlogModel
+@{
+    ViewData["Title"] = "Edit Blog Post";
+}
+
+<h3>Edit Blog - @Model.BlogId</h3>
+
+<form action="/Blog/Update/@Model.BlogId" method="post">
+    <div class="mb-3">
+        <label for="blogTitle" class="form-label">Blog Title</label>
+        <input type="text" class="form-control" id="blogTitle" name="BlogTitle" value="@Model.BlogTitle" placeholder="Enter blog title">
+    </div>
+
+    <div class="mb-3">
+        <label for="blogAuthor" class="form-label">Blog Author</label>
+        <input type="text" class="form-control" id="blogAuthor" name="BlogAuthor" value="@Model.BlogAuthor" placeholder="Enter author name">
+    </div>
+
+    <div class="mb-3">
+        <label for="blogContent" class="form-label">Blog Content</label>
+        <textarea class="form-control" id="blogContent" rows="5" name="BlogContent"
+                  placeholder="Write your blog content here...">@Model.BlogContent</textarea>
+    </div>
+
+    <a href="/Blog" class="btn btn-outline-dark">Back</a>
+    <button type="submit" class="btn btn-success">Update</button>
+</form>
