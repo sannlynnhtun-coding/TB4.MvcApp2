@@ -2,5 +2,6 @@
   <Folder Name="/Solution Items/">
     <File Path="README.md" />
   </Folder>
+  <Project Path="TB4.MvcApp2.AjaxSample/TB4.MvcApp2.AjaxSample.csproj" Id="80cf1ac6-e772-44be-9e1b-e7d7fe5c0afb" />
   <Project Path="TB4.MvcApp2/TB4.MvcApp2.csproj" />
 </Solution>
